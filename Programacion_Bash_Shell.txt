@@ -1,0 +1,75 @@
+Lista de comandos:
+*man date: el comando man sirve para mostrar el manual del comando utilizado
+           (en este caso el comando date).
+*info date: el comando info sirve para mostrar información completa y 
+            detallada del comando utilizado (en este caso el comando date).
+
+/***** Bash Scripting *****/
+La idea básica de generar programas en bash es poder ejecutar múltiples comandos de forma secuencial,
+en muchas ocasiones para automatizar una tarea en especifico. Estos comandos son colocados en un archivo
+de texto de manera secuencial para poder ejecutarlos a posterioridad.
+
+Un archivo .vimrc podremos configurar de mejor manera nuestro editor VIM.
+
+Presionamos I para poder escribir en nuestro editor.
+Presionamos ESC para salir del modo edición, luego escribimos :wq para salir y guardar nuestro archivo.
+
+*cd $home: Para ir a nuestro directorio de usuario.
+
+configurar vim para el curso:
+1. Abrir un archivo vim .vimrc
+2. Escribir lo siguiente dentro del archivo:
+   set showmode
+   set autoident
+   set tabstop=4
+   set expandtab
+   syntax on
+
+/***** Ejecutar nuestro script con un nombre único *****/
+*type <comando>: nos da el tipo y localidad de cierto comando, y nos sirve para prevenir dar
+                 nombre equivocado a nuestros scripts.
+
+/***** Declaración de variables y alcance en bash shell *****/
+*vim /etc/profile: en este archivo se encuentran las configuraciones de las variables de entorno.
+
+/***** Atajos en vim *****/
+Presionar esc + u: para deshacer lo último que hicimos.
+Presionar esc + n (si queremos copiar n lineas presionar n) y y: Copia la linea en la que estamos actualmente.
+Presionar esc + p (O solo p después de copiar): pega las líneas que tenemos copiadas.
+Presionar esc + n (si queremos borrar n lineas presionar n) d d: borra la n cantidad de líneas de texto.
+
+
+/***** Debug en script *****/
+Para realizar debugging en un script tenemos dos opciones en el comando de bash:
+-v: Utilizado para ver el resultado detallado de nuestro script, evaluado línea por línea.
+-x: Utilizado para desplegar la información de los comandos que son usados, capturando el comando y su salida.
+
+/***** Validar información *****/
+Para el proceso de validación de información tenemos dos herramientas en las cuales apoyarnos:
+1.- Para validar tamaños se utiliza el siguiente comando: read -n <numero_caracteres>
+2.- Para validar el tipo de datos se utilizan las expresiones regulares
+
+/***** OPERADORES RELACIONALES *****/
+-eq: is equal to // Igual a
+-ne: is not equal to // No es igual a
+-gt: is greater than // Mayor a
+-ge: is greater than or equal to // Mayor o igual a
+-lt: is less than // Menor a
+-le: is less than or equal to // Menor o igual a
+
+/***** Script con argumentos *****/
+Hay algunos identificadores para cuando ejecutamos un script con argumentos:
+$0: Se refiere al nombre del Script
+$1 al ${10}: Se refiere al número de argumento. Si es más de uno lo colocamos dentro de llaves.
+$#: Es útil para conocer el número de argumentos enviados.
+$*: Con este podemos conocer todos los argumentos enviados.
+
+/***** Empaquetamiento TAR, GZIP y PBZIP 2 *****/
+El empaquetamiento es un tema interesante para manejar respaldos u otro tipo de archivos,  
+para poder reducir el tamaño de uno o varios archivos para luego distribuirlos a través de la red 
+u otra ubicación dentro del equipo.
+tar: permite empaquetar múltiples archivos
+gzip: éste solo nos permite empaquetar un único archivo, pero nos permite optimizar 
+      el tamaño del empaquetado. Suele usarse en conjunto con tar.
+pbzip2: éste comando permite soportar el multicore, multiprocesador. Solo podemos 
+        empaquetar un solo archivo.

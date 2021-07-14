@@ -1,0 +1,226 @@
+Lista de comandos:
+*date: muestra la fecha.
+*man date: el comando man sirve para mostrar el manual del comando utilizado.
+*history: muestra una lista de los comandos utilizados cronologicamente.
+*echo "mensaje": muestra el mensaje escrito entre las comillas.
+*!num_coman: dada la lista enumerada que muestra el historial, se toma 
+            el número correspondiente al comando ejecutado.
+*ls: sirve para ver los archivos que hay en un directorio. 
+*ls -a: Lista todos los archivos incluyendo aquellos que se han definido
+       como ocultos. Los archivos que aparecen con un punto al principio 
+       son los que están ocultos.
+*ls dump4*: vemos todos los archivos que comienzan con dump4.
+*pwd(print working directoy): muestra en que directorio estamos.
+*cd: para cambiar directorio. Se escribe cd y después el directorio al cual
+    me quiero mover.
+*cd ~: nos lleva al home, es un atajo.
+*cd -: nos lleva al último directorio visitado.
+*mkdir: para crear un directorio, se escribe este comando, seguido del nombre
+       para nuestro nuevo directorio.
+*ls -l: para saber si se creo directorio o archivo. Muestra detalles.
+*cd ..: nos lleva al directorio padre o anterior.
+*cp [arch] [destino]: el comando cp copia el archivo arch al directorio de destino
+              dest.
+*rm arch: remueve del directorio el archivo arch.
+*mv ../arch .: muevo del directorio anterior al directorio actual el archivo 
+              arch.
+*ls ../: para ver el contenido del directorio anterior.
+*mv arch ../: mueve el archivo arch al directorio anterior u original.
+*mv [ruta del archivo] [directorio de destino]: cambio de ubicación de un archivo.
+*rmdir dir: borra el directorio dir, no se puede borrar un directorio
+           con archivos dentro.
+*..: este archivo es un puntero a directorio padre.
+*.: este archivo es un puntero a directorio actual.
+*ls -t: ordena los archivos por fecha de modificación.
+*ls -x: ordena los archivos por extensión.
+*ls -l: Muestra toda la información: usuario, grupo, permisos, tamaño,
+       fecha y hora de creación.
+*ls -lh: Muestra la misma información que ls -l pero con las unidades
+        de tamaño en KB, MB.
+*ls -R: Muestra el contenido de todos los subdirectorios de forma recursiva.
+*ls -S: Ordena los resultados por tamaño de archivo.
+
+/****** Comandos para trabajar con archivos de texto en modo procesamiento por lotes *****/
+
+*cat arch.txt: sirve para ver el contenido del archivo.
+*head arch.txt: con este comando se pueden visualizar las primeras
+               líneas del archivo arch.txt. Nos mostrará las primeras 10 (por defecto).
+*head -n 5 arch.txt: muestra las primeras 5 lineas del archivo, si quiero
+                    que muestre otro numero de linea cambiar por el 5.
+*tail arch.txt: muestra las ultimas lineas del archivo arch.txt.
+*tail -n 5 arch.txt: muestra las ultimas 5 lineas del archivo.
+*grep Hanks arch.txt: muestra las o la linea que coinciden con la palabra Hanks
+                     sobre el archivo arch.txt.
+*grep -i hanks arch.txt: muestra las o la linea que coinciden con la palabra Hanks
+                     sobre el archivo arch.txt sin tomar en cuenta mayúsculas o minusculas.
+*grep hanks$ arch.txt: muestra
+*sed 's/Hanks/Selleck/g' arch.txt: (String editor) el modificador s/ nos indica que la palabra Hanks
+                              será sustituida por Selleck, y el modificador /g nos dice 
+                              que dicha sustitución será a lo largo del archivo arch.txt.
+*sed '$d' arch.txt: con este comando, no se mostrara la última línea del 
+                   archivo arch.txt.   
+*tr : \\n: intercambio salto de página por cada semicolon.
+*awk -F ';' '{ print $1}' arch.txt: (Tratamiento de texto delimitado)
+                                   imprimir solo la primera columna (el $1 es la primera
+                                   columna) del archivo arch.txt separada por el delimitador ';'.
+*touch archivo.txt: nos permite crear archivos.    
+
+/*****  Administración de procesos y redirección de procesos  *****/
+*ls > archivo.txt: al aplicar el comando > hara que se imprima el
+                  resultado del comando ls dentro de archivo.txt
+                  en lugar de la pantalla(redirección de salida). Esto para analizar a detalle.
+*ls -l >> archivo.txt: se añade el resultado del comando ls -l dentro de
+                      archivo.txt.
+*ls -l | more: Esta utilidad lo que hace es mostrar un resultado largo 
+              en varias pantallas (dar enter para pasar a la siguiente)
+*cat archivo.txt | wc -l: (word count) nos permite contar caracteres, palabras,
+                         lineas (modificador -l de lineas), etc.
+*ls -l /root 2>error.log: Se redirige el error del comando a error.log.
+*<cualquier_comando> &: se usa al final de los comandos para que se ejecute el proceso,
+                       pero el control de la terminal vuelva al usuario.
+Daemons: un proceso en background ejecutándose continuamente.
+*ctrl-z: manda el proceso al background.
+*ctrl-c: interrumpe el proceso que se está ejecuntando.
+*fg: traer un proceso al foreground.
+*ps: muestra los procesos en ejecución.
+*ps ax: muestra información más detallada de los procesos en ejecución.
+*top: para ver los procesos en tiempo real. Se sale con q.
+*kill <num_proceso>: matar el proceso.
+*kill -9 <num_proceso>: mata al proceso inmediatamente.
+*killall: similar a kill, pero se le pasa el nombre del proceso.
+
+/*****  Actualizacion de permisos y propietarios  *****/
+Cuando nos refiramos al usuario propietario debemos usar la letra u. Si 
+cambiamos los permisos del grupo una g. Si queremos cambiar los permisos
+de cualquier otro usuario usamos la o. Y si queremos cambiar los permisos de 
+TODOS usamos la a.
+
+# Añadir permisos de escritura al grupo:
+chmod g+w archivo.txt
+
+# Eliminar permisos de lectura a los usuarios no propietarios
+# ni miembros del grupo al que pertenece el archivo:
+chmod o-r archivo.txt
+
+# Añadir permisos de ejecución a todos (cualquier usuario):
+chmod a+x archivo.txt
+
+Pero no solo podemos representar los permisos usando letras, también
+podemos hacerlos den formato numérico, con 3 números del 0 al 7:
+
+- = 0
+x = 1
+w = 2
+r = 4
+
+Debemos sumar las 3 letras de cada permiso para obtener el "número
+definitivo". Así que, continuando con el ejemplo anterior:
+
+Permisos del usuario propietario: r(4) + w(2) +x(1) = 7.
+Permisos del grupo al que pertenece el archivo: r(4) + x(1) = 5.
+Permisos del grupo al que pertenece el archivo: r(4) = 4.
+
+Todo esto para conseguir un resultado de 754. Así que, si queremos
+eliminar los permisos de ejecución para el grupo, podemos usar el comando
+chmod con el número 744.
+
+chmod 744 archivo.txt
+
+Ahora digamos que queremos cambiar el usuario propietario de nuestro
+archivo. Para esto usaremos el comando chown seguido del nuevo usuario o 
+grupo propietario del archivo.
+
+# Cambiar el usuario propietario:
+sudo chown nuevo-usuario archivo.txt
+
+# cambiar el grupo propietario:
+sudo chown :nuevo-grupo archivo.txt
+sudo chgrp nuevo-grupo archivo.txt
+
+# Cambiar el usuario y el grupo propietario:
+sudo chown nuevo-usuario:nuevo-grupo archivo.txt
+
+/*****  Sistemas de manejo de paquetes  *****/
+
+*sudo apt install <nombre_paquete>: sudo es para darme permisos de super usuario, 
+                                   apt install para instalar <nombre_paquete>.
+*sudo apt update: actualiza paquetes de instalación.
+
+/*****  Compresión y combinación de archivos (tratamiento archivos pesados) *****/
+*gzip <nombre_archivo>: comprime el archivo.
+*gzip -d <nombre_del_comprimido>: descomprime el archivo.
+*tar cf backup.tar backup/*: se creará el archivo backup.tar que contendra todos los
+                            archivos de la carpeta backup/ (cf de create file)
+                            Nota: este comando no comprime solo combina.
+*tar tf backup.tar: vemos el contenido de backup.tar.
+*tar xf backup.tar: expandimos el contenido de backup.tar.
+*tar czf backup.tgz backup/*: combina y comprime los archivos de backup/.
+*tar xzf backup.tgz: descomprime y expandimos los archivos
+
+/*****  Herramientas de búsqueda de archivos  *****/
+*sudo updatedb: actualiza la base de datos de los directorios. Es conveniente
+                ejecutar este comando antes de usar locate.
+*locate <nombre_archivo>: busca en todos los directorios el archivo <nombre_archivo>.
+*whereis echo: búsqueda(dirección) de archivos binarios.
+*find . -user Ricardo -perm 644: En determinado directorio hace una busqueda detallada
+                                 del archivo con ciertas condiciones (restricciones)
+
+/*****  Interacción con el servidor web *****/
+*curl https://platzi.com: se utiliza para hacer pedidos crudos.
+*curl -v https://platzi.com: nos da toda la comunicación https, más detallado.
+*wget https://www.php.net/distributions/php-7.3.10.tar.bz2:realiza descargas desde servitores http.
+
+/*****  Acceso seguro a otras computadoras *****/
+*ssh <usuario> <@host_a_conectar> <contraseña>: (secure shield o terminal segura) conectarse a un 
+                                                servidor de manera remota
+*ssh <configuracion_previa>: conectarse a un servidor de manera remota
+                            con una config. ya preestablecida.
+*cat .ssh/config: Muestra las configuraciones ya establecidas para conectarse a servidores.
+
+/*****  Correo electronico ubuntu *****/
+*sudo DEBIAN_PRIORITY=low apt install postfix: instala postfix.
+*sudo apt install mailutils: instala utilidades de correo.
+*echo "Hola Mundo!" | mail -s "Testing" TU_MAIL: envío de correo electrónico.
+*sudo dpkg-reconfigure postfix: reconfigurar postfix
+
+/*****  Variables de entorno *****/
+*echo $PATH: la variable PATH es una variable de entorno, donde se
+            visualizan los directorios de los comandos (con el simbolo
+            $ se visualiza el contenido de dicha variable).
+*export: muestra las variables de entorno del sistema.
+*export <VAR>=valor: Asignación global de una variable de entorno. (Para
+                    toda la sesión)
+*<VAR>=<valor><comando>: asignación particular, solo se define para el
+                        comando que voy a ejecutar.
+
+/*****  Bash scripting *****/
+*vim /etc/environment: en este archivo esta definida la variable PATH.
+                       (archivo de configuración del sistema)
+Para escribir un nuevo script (nuevo comando o comando compuesto) realizamos la
+siguiente nomenclatura:
+*vim <nombre_script>.sh: aqui comenzamos a escribir el script.
+Se deberá, en la primera línea, ecribir el interprete:
+#!/bin/bash   ---- Aqui debemos colocar la dirección donde se encuentra el archivo bash (whereis bash)
+if [ ! -d "/root/$NEW_DIR"]; then  ---- con el comando -d pregunto si el directorio existe
+    mkdir /root/$NEW_DIR
+    fi                            ----- con el comando fi cierro el if
+    echo "`date`: Todo listo jefe!" --- dentro de las comillas `` se imprimiran los resultados de 
+    los comandos (que en este ejemplo es el de date)
+
+/*****  Programación de tareas  *****/
+*at now +2 minutes: programara dentro de 2 minutos algún comando o tarea. A conti-
+                   nuación se abre el prompt para indicar la tarea.
+A continuación se describe la manera de escribir las tareas programadas:
+*at> echo "Hola mundo!" > /home/mauro/hola.txt
+*at> <EOT> : con control + d terminamos y queda programada la tarea.
+
+*crontab -e: permite ver y editar nuevas tareas.
+
+/c/Users/skizo/OneDrive/Escritorio/TutorialesSWSistemasEmbebidos
+
+
+
+
+
+      
+                 
